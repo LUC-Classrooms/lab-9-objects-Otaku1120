@@ -11,12 +11,18 @@ function setup() {
   hint: use the "new" keyword with the constructor function MyClass()
   assign the result of this function to myObj1 and then to myObj2
   */
+myObj1 = new MyClass(100,100);
+myObj2 = new MyClass(100,200);
+
 }
 
 function draw() {
   background(200);
   // add code here to make your objects move and display on canvas
-  
+  myObj1.display();
+  myObj1.move();
+  myObj2.display();
+  myObj2.move();
 }
 
 //Class constructor:
@@ -25,16 +31,22 @@ function MyClass(tempX, tempY){
   // some basic object properties
   this.x = tempX; // assign the first argument to the x property
   this.y = tempY; // assign the second argument to the y property
-  this.d = random(25, 100); //each instance will be a different size
-  this.xSpeed = random (-1.0, 1.0); // each instance moves in a different direction
+  this.d = random(25, 100); //each instance will be a different size/ 25 min 100 max
+  this.xSpeed = random (-1.0, 1.0); // each instance moves in a different direction speed
   this.ySpeed = random (-1.0, 1.0);
-  this.color = color(random(255), random(255), random(255));
+  this.color = color(random(255), random(255), random(255));// color
   
   //some basic object methods
   this.move = function (){
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    
+    if(this.x > width || this.x < 0){// not x bc too many use this
+    this.xSpeed*= -1;
+  }
+
+    if(this.y > height || this.y <0){
+      this.ySpeed*=-1;
+  }
     //maybe add some code to keep it on the canvas ...
   }
   
